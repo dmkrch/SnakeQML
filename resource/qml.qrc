@@ -1,0 +1,13 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+    </qresource>
+    <qresource prefix="/image">
+        <file alias="strawberry">images/strawberry.png</file>
+        <file alias="orange">images/orange.png</file>
+        <file alias="banana">images/banana.png</file>
+        <file alias="apple">images/apple.png</file>
+        <file alias="body">images/snakeBody.png</file>
+        <file alias="head">images/headRight.png</file>
+    </qresource>
+</RCC>
