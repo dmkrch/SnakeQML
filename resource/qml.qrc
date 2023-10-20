@@ -1,6 +1,7 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
+        <file>SText.qml</file>
     </qresource>
     <qresource prefix="/image">
         <file alias="strawberry">images/strawberry.png</file>

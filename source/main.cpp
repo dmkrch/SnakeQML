@@ -27,7 +27,7 @@ int main(int argc, char *argv[])
     GameEngine engine;
     context->setContextProperty("_engine", &engine);
 
-    view.setSource(QUrl("qrc:main.qml"));
+    view.setSource(QUrl("qrc:/main.qml"));
 
     view.show();
 

@@ -1,5 +1,6 @@
 import QtQuick 2.12
 import QtQuick.Window 2.12
+
 import my.gameengine 1.0
 
 Item
@@ -11,15 +12,11 @@ Item
     Keys.onRightPressed: _engine.snakeDirection = MovementDirection.Right
     Keys.onLeftPressed: _engine.snakeDirection = MovementDirection.Left
 
-    Text
+    SText
     {
         id: gameoverTxt
         text: "GAMEOVER! YOUR SCORE: " + _engine.getSnake().count + " POINTS !";
         visible: _engine.isGameOver
-        anchors.fill: parent
-        font.family: "Helvetica"
-        font.pointSize: 20
-        color: "red"
         z: 1;
     }
 
