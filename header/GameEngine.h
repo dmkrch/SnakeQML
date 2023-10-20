@@ -7,6 +7,7 @@
 
 #include "Snake.h"
 #include "Food.h"
+#include "AllEnums.h"
 
 class GameEngine : public QObject
 {

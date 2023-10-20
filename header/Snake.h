@@ -2,18 +2,24 @@
 
 #include <functional>
 #include <QVector>
+#include <qobjectdefs.h>
 
 #include "Object2D.h"
 
 // direction of objects' movement; value is pared with arrow's ascii code on keyboard
-enum class MovementDirection
+namespace gameengine
 {
-    Up = 1,
-    Down = 2,
-    Right = 3,
-    Left = 4,
-    Nothing = 5,
-};
+    Q_NAMESPACE
+    enum class MovementDirection
+    {
+        Up = 1,
+        Down = 2,
+        Right = 3,
+        Left = 4,
+        Nothing = 5,
+    };
+    Q_ENUM_NS(MovementDirection)
+}
 
 // snake part of body (head as well)
 class SnakeCell : public ImageObject2D
@@ -51,8 +57,8 @@ public:
 	// eat food with value (amount of food)
 	void EatFood(int val);
 
-    void SetDirection(const MovementDirection & direction);
-	MovementDirection GetDirection() const;
+    void SetDirection(gameengine::MovementDirection direction);
+    gameengine::MovementDirection GetDirection() const;
 
     int getCellsCount() const;
 
@@ -66,6 +72,6 @@ private:
     QVector<SnakeCell*> m_cells;
 
     // current snake's direction
-    MovementDirection m_direction;
+    gameengine::MovementDirection m_direction;
 };
 

@@ -1,14 +1,15 @@
 import QtQuick 2.12
 import QtQuick.Window 2.12
+import my.gameengine 1.0
 
 Item
 {
     height: _engine.cellSize * 20; width: _engine.cellSize * 20;
     focus: true
-    Keys.onUpPressed: _engine.snakeDirection = 1
-    Keys.onDownPressed: _engine.snakeDirection = 2
-    Keys.onRightPressed: _engine.snakeDirection = 3
-    Keys.onLeftPressed: _engine.snakeDirection = 4
+    Keys.onUpPressed: _engine.snakeDirection = MovementDirection.Up
+    Keys.onDownPressed: _engine.snakeDirection = MovementDirection.Down
+    Keys.onRightPressed: _engine.snakeDirection = MovementDirection.Right
+    Keys.onLeftPressed: _engine.snakeDirection = MovementDirection.Left
 
     Text
     {
@@ -42,14 +43,16 @@ Item
             {
                 if (model.index === 0)
                 {
-                    if (_engine.snakeDirection === 1)
+                    if (_engine.snakeDirection === MovementDirection.Up)
                         return 270.0;
-                    else if(_engine.snakeDirection === 2)
+                    else if(_engine.snakeDirection === MovementDirection.Down)
                         return 90.0;
-                    else if (_engine.snakeDirection === 3)
+                    else if (_engine.snakeDirection === MovementDirection.Right)
                         return 0.0;
-                    else if (_engine.snakeDirection === 4)
+                    else if (_engine.snakeDirection === MovementDirection.Left)
                         return 180.0;
+                    else
+                        return 0;
                 }
             }
 

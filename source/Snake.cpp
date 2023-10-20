@@ -8,7 +8,7 @@
 #include <algorithm>
 
 Snake::Snake()
-	: m_direction(MovementDirection::Right)
+    : m_direction(gameengine::MovementDirection::Right)
 {
     // create head of snake and 2 other cells
     m_cells << new SnakeCell(headImgUrl, 2, 0);
@@ -20,7 +20,7 @@ Snake::Snake()
 
 void Snake::Move()
 {
-	if (m_direction == MovementDirection::Nothing)
+    if (m_direction == gameengine::MovementDirection::Nothing)
 		return;
 
 	// When snake moves, head moves to new direction. Each previous body cell transforms to next body cell coordinates
@@ -31,16 +31,16 @@ void Snake::Move()
 
 	switch(m_direction)
 	{
-	case MovementDirection::Up:
+    case gameengine::MovementDirection::Up:
 		--newY;
 		break;
-	case MovementDirection::Down:
+    case gameengine::MovementDirection::Down:
 		++newY;
 		break;
-	case MovementDirection::Right:
+    case gameengine::MovementDirection::Right:
 		++newX;
 		break;
-	case MovementDirection::Left:
+    case gameengine::MovementDirection::Left:
 		--newX;
 		break;
 	default:
@@ -80,7 +80,7 @@ void Snake::GetHeadCoords(int& x, int& y) const
 
 bool Snake::IsHeadHitsBody() const
 {
-	if (m_cells.size() < static_cast<size_t>(2))
+    if (m_cells.size() < 2)
 		return false;
 
     int headX = m_cells[0]->getX();
@@ -105,16 +105,16 @@ void Snake::EatFood(int val)
 		// insert new body cell to opposite side of current direction
 		switch (m_direction)
 		{
-		case MovementDirection::Down:
+        case gameengine::MovementDirection::Down:
 			--newY;
 			break;
-		case MovementDirection::Up:
+        case gameengine::MovementDirection::Up:
 			++newY;
 			break;
-		case MovementDirection::Right:
+        case gameengine::MovementDirection::Right:
 			--newX;
 			break;
-		case MovementDirection::Left:
+        case gameengine::MovementDirection::Left:
 			++newX;
 			break;
 		default:
@@ -126,12 +126,12 @@ void Snake::EatFood(int val)
 	}
 }
 
-void Snake::SetDirection(const MovementDirection & direction)
+void Snake::SetDirection(gameengine::MovementDirection direction)
 {
 	m_direction = direction;
 }
 
-MovementDirection Snake::GetDirection() const
+gameengine::MovementDirection Snake::GetDirection() const
 {
 	return m_direction;
 }

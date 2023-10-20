@@ -64,6 +64,8 @@ void GameEngine::GenerateNewFood()
 
 void GameEngine::setDirection(int dir)
 {
+    using namespace gameengine;
+
     MovementDirection dirCasted = static_cast<MovementDirection>(dir);
 
     if ((dirCasted == MovementDirection::Down) && (m_snake->GetDirection() == MovementDirection::Up))
@@ -89,6 +91,8 @@ QObject *GameEngine::getSnake() const
 
 int GameEngine::getRotation() const
 {
+    using namespace gameengine;
+
     auto dir = m_snake->GetDirection();
 
     switch(dir)
@@ -108,7 +112,7 @@ int GameEngine::getRotation() const
 
 int GameEngine::getDirection() const
 {
-    return static_cast<int>(m_snake->GetDirection());
+    static_cast<int>(m_snake->GetDirection());
 }
 
 bool GameEngine::getGameover() const
