@@ -7,7 +7,6 @@
 
 #include "Snake.h"
 #include "Food.h"
-#include "AllEnums.h"
 
 class GameEngine : public QObject
 {
@@ -16,6 +15,8 @@ class GameEngine : public QObject
     Q_PROPERTY(int foodCount READ getFoodCount NOTIFY foodCountChanged)
     Q_PROPERTY(int isGameOver READ getGameover NOTIFY gameOverChanged)
     Q_PROPERTY(int snakeDirection READ getDirection WRITE setDirection NOTIFY directionChanged)
+
+    using base_t = QObject;
 
 public:
     GameEngine(QObject * parent = nullptr);
@@ -47,6 +48,9 @@ signals:
     void foodCountChanged();
     void gameOverChanged();
     void directionChanged();
+
+private:
+    void SnakeEatsFoodAction();
 
 private:
     Snake * m_snake;

@@ -3,7 +3,8 @@
 
 #include <QRandomGenerator>
 
-GameEngine::GameEngine(QObject *parent)
+GameEngine::GameEngine(QObject * parent)
+    : base_t(parent)
 {
     m_timer = new QTimer();
     m_snake = new Snake();
@@ -112,7 +113,7 @@ int GameEngine::getRotation() const
 
 int GameEngine::getDirection() const
 {
-    static_cast<int>(m_snake->GetDirection());
+    return static_cast<int>(m_snake->GetDirection());
 }
 
 bool GameEngine::getGameover() const
@@ -120,19 +121,8 @@ bool GameEngine::getGameover() const
     return m_isGameover;
 }
 
-void GameEngine::onNewMove()
+void GameEngine::SnakeEatsFoodAction()
 {
-    m_snake->Move();
-
-    if (m_snake->IsHeadHitsBody())
-    {
-        m_timer->stop();
-
-        m_isGameover = true;
-        emit gameOverChanged();
-        return;
-    }
-
     int headX, headY;
     m_snake->GetHeadCoords(headX, headY);
 
@@ -153,4 +143,20 @@ void GameEngine::onNewMove()
 
         GenerateNewFood();
     }
+}
+
+void GameEngine::onNewMove()
+{
+    m_snake->Move();
+
+    if (m_snake->IsHeadHitsBody())
+    {
+        m_timer->stop();
+
+        m_isGameover = true;
+        emit gameOverChanged();
+        return;
+    }
+
+    SnakeEatsFoodAction();
 }
