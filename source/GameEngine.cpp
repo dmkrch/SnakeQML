@@ -69,17 +69,39 @@ void GameEngine::setDirection(int dir)
 
     MovementDirection dirCasted = static_cast<MovementDirection>(dir);
 
-    if ((dirCasted == MovementDirection::Down) && (m_snake->GetDirection() == MovementDirection::Up))
-        return;
+    // check whether dir is correct
+    if (m_snake->getCellsCount() > 1)
+    {
+        auto snakeHead = dynamic_cast<SnakeCell*>(m_snake->getAt(0));
+        int newHeadX = snakeHead->getX();
+        int newHeadY = snakeHead->getY();
 
-    if ((dirCasted == MovementDirection::Up) && (m_snake->GetDirection() == MovementDirection::Down))
-        return;
+        // changed head x, y like we move into dir
+        switch(dirCasted)
+        {
+        case gameengine::MovementDirection::Up:
+            --newHeadY;
+            break;
+        case gameengine::MovementDirection::Down:
+            ++newHeadY;
+            break;
+        case gameengine::MovementDirection::Right:
+            ++newHeadX;
+            break;
+        case gameengine::MovementDirection::Left:
+            --newHeadX;
+            break;
+        default:
+            break;
+        }
 
-    if ((dirCasted == MovementDirection::Left) && (m_snake->GetDirection() == MovementDirection::Right))
-        return;
+        // now check whether head is same as head-1 cell
+        auto snakePredHead = dynamic_cast<SnakeCell*>(m_snake->getAt(1));
 
-    if ((dirCasted == MovementDirection::Right) && (m_snake->GetDirection() == MovementDirection::Left))
-        return;
+        // if they are same - dont change dir
+        if ((snakePredHead->getX() == newHeadX) && (snakePredHead->getY() == newHeadY))
+            return;
+    }
 
     m_snake->SetDirection(dirCasted);
     emit directionChanged();
